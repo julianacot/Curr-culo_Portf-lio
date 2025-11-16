@@ -12,6 +12,7 @@ const palavras = [
   'TATUAGEM', 'SABONETE', 'RINOCERONTE', 'QUIMICA', 'PTERODATILO', 'ORGANOGRAMA'
 ];
 
+
 export default function Forca() {
   const palavraAleatoria = palavras[Math.floor(Math.random() * palavras.length)];
   const [palavra] = useState(palavraAleatoria);
