@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Alert } from 'react-native';
+import { StyleSheet, View, Text, TouchableOpacity, ScrollView, Alert, Image } from 'react-native';
 import { router } from 'expo-router';
 import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
@@ -12,15 +12,24 @@ const palavras = [
   'TATUAGEM', 'SABONETE', 'RINOCERONTE', 'QUIMICA', 'PTERODATILO', 'ORGANOGRAMA'
 ];
 
+const imagensForca = [
+  require('../../../assets/imagem/forca-0.png'),
+  require('../../../assets/imagem/forca-1.png'),
+  require('../../../assets/imagem/forca-2.png'),
+  require('../../../assets/imagem/forca-3.png'),
+  require('../../../assets/imagem/forca-4.png'),
+  require('../../../assets/imagem/forca-5.png'),
+  require('../../../assets/imagem/forca-6.png'),
+];
 
 export default function Forca() {
   const palavraAleatoria = palavras[Math.floor(Math.random() * palavras.length)];
   const [palavra] = useState(palavraAleatoria);
   const [tentativas, setTentativas] = useState(6);
-  const [letrasErradas, setLetrasErradas] = useState([]);
-  const [letrasCorretas, setLetrasCorretas] = useState([]);
+  const [letrasErradas, setLetrasErradas] = useState<string[]>([]);
+  const [letrasCorretas, setLetrasCorretas] = useState<string[]>([]);
 
-  const verificarLetra = (letra) => {
+  const verificarLetra = (letra: string) => {
     if (letrasErradas.includes(letra) || letrasCorretas.includes(letra) || tentativas <= 0 || venceu) return;
 
     if (palavra.includes(letra)) {
@@ -57,15 +66,12 @@ export default function Forca() {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-
       <ThemedText type="title" style={styles.titulo}>
         Jogo da Forca
       </ThemedText>
 
       <View style={styles.forca}>
-        <View style={styles.placeholder}>
-          <Text style={styles.placeholderText}>Erros: {6 - tentativas} / 6</Text>
-        </View>
+        <Image source={imagensForca[6 - tentativas]} style={styles.imagemForca} resizeMode="contain" />
       </View>
 
       <ThemedText type="subtitle" style={styles.palavraExibida}>
@@ -110,7 +116,6 @@ export default function Forca() {
           <Text style={styles.botaoTextoAcao}>Home</Text>
         </TouchableOpacity>
       </View>
-
     </ScrollView>
   );
 }
@@ -136,19 +141,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
   },
-  placeholder: {
+  imagemForca: {
     width: '80%',
     height: '100%',
-    borderRadius: 10,
-    borderWidth: 2,
-    borderColor: '#aff0a9ff',
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#07220d',
-  },
-  placeholderText: {
-    color: '#86f08fff',
-    fontSize: 18,
   },
   palavraExibida: {
     color: '#86f08fff',
