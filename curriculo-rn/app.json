@@ -1,0 +1,10 @@
+{
+  "expo": {
+    "scheme": "acme",
+    "plugins": [
+      "expo-router"
+    ],
+    "name": "curriculo-rn",
+    "slug": "curriculo-rn"
+  }
+}
